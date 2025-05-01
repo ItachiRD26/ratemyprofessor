@@ -90,8 +90,12 @@ export async function fetchCareers(): Promise<any[]> {
   const snapshot = await get(ref(db, "careers"))
   const data = snapshot.val()
   if (!data) return []
-  return Object.entries(data).map(([id, value]) => ({ id, ...(value as any) }))
+
+  return Object.entries(data)
+    .map(([id, value]) => ({ id, ...(value as any) }))
+    .sort((a, b) => a.name.localeCompare(b.name))
 }
+
 
 // Fetch all subjects
 export async function fetchSubjects(): Promise<any[]> {

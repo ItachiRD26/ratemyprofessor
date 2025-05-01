@@ -54,8 +54,8 @@ export default function SearchPage() {
       setIsLoading(true)
       const allCareers = await fetchCareers()
       const filtered = allCareers.filter(
-        (c: any) => c.universityId === selectedUniversity && (!selectedProvince || c.provinceId === selectedProvince),
-      )
+        (c: any) => c.universityId === selectedUniversity
+      )      
       setCareers(filtered)
       setIsLoading(false)
     }

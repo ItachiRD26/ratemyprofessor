@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Califica Tu Profesor - República Dominicana",
   description: "Plataforma anónima para evaluar profesores de universidades en República Dominicana",
+  icons: {
+    icon: "/logo.png",
+  }
 }
 
 export default function RootLayout({

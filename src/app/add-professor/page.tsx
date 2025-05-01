@@ -60,8 +60,8 @@ export default function AddProfessorPage() {
     fetchCareers()
       .then((all) => {
         const filtered = all.filter(
-          (c) => c.universityId === selectedUniversity && (!selectedProvince || c.provinceId === selectedProvince),
-        )
+          (c) => c.universityId === selectedUniversity
+        )        
         setCareers(filtered)
       })
       .finally(() => setIsLoading(false))
