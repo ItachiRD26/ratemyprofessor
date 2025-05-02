@@ -1,6 +1,3 @@
-import Link from "next/link"
-// import AdBanner from "@/components/ad-banner"
-
 // Importar los datos de universidades
 import { universities } from "@/lib/university-data"
 
