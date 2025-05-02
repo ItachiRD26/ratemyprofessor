@@ -320,14 +320,14 @@ export default function SearchPage() {
               <p className="text-gray-600 mb-6 text-lg">
                 {selectedSubject || searchQuery
                   ? "No se encontraron profesores con los criterios seleccionados."
-                  : "No has realizado una búsqueda aún."}
+                  : "No has realizado una búsqueda aún o no esta en la base de datos."}
               </p>
               <Link
                 href="/add-professor"
                 className="inline-flex items-center gap-2 bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-200"
               >
                 <Plus size={18} />
-                Añadir profesor
+                Añadir profesor y Materia
               </Link>
             </div>
           )}
