@@ -1,5 +1,5 @@
 import Link from "next/link"
-import AdBanner from "@/components/ad-banner"
+// import AdBanner from "@/components/ad-banner"
 
 // Importar los datos de universidades
 import { universities } from "@/lib/university-data"
@@ -119,7 +119,7 @@ export default function AboutPage() {
             </div>
 
             {/* Ad Banner */}
-            <AdBanner slot="1234567890" className="h-[250px] bg-blue-50 rounded-md overflow-hidden shadow-sm mb-8" />
+           {/* aquiva un el banner de anuncios */}
 
             {/* Actualizar la sección de universidades participantes */}
             <div className="bg-white rounded-lg shadow-md p-6 border border-blue-100 hover:shadow-lg transition-shadow">

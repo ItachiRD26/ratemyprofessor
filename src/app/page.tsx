@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
-import AdBanner from "@/components/ad-banner"
+// import AdBanner from "@/components/ad-banner"
 
 // Importar los datos de universidades
 import { universities } from "@/lib/university-data"
@@ -29,7 +29,7 @@ export default function Home() {
 
       {/* Ad Banner */}
       <div className="container mx-auto px-4 py-8">
-        <AdBanner slot="1234567890" className="h-[90px] bg-blue-50 rounded-md overflow-hidden shadow-sm" />
+        {/* aqui va el banner de anuncios */}
       </div>
 
       {/* How It Works Section */}
@@ -69,7 +69,7 @@ export default function Home() {
 
       {/* Ad Banner */}
       <div className="container mx-auto px-4 py-8">
-        <AdBanner slot="0987654321" className="h-[250px] bg-blue-50 rounded-md overflow-hidden shadow-sm" />
+        {/* aqui va el banner de anuncios */}
       </div>
 
       {/* Featured Universities */}

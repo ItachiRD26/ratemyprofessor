@@ -9,6 +9,20 @@ import { ChevronLeft, AlertCircle, Plus, Save } from "lucide-react"
 import { universities, provinces } from "@/lib/university-data"
 import { fetchCareers, fetchSubjects, saveProfessor, saveSubject, saveCareer } from "@/lib/database"
 
+interface Subject {
+  id: string;
+  name: string;
+  code?: string;
+  careerId: string;
+}
+
+interface Career {
+  id: string;
+  name: string;
+  universityId: string;
+  provinceId: string;
+}
+
 export default function AddProfessorPage() {
   const router = useRouter()
   const [name, setName] = useState("")
@@ -16,10 +30,11 @@ export default function AddProfessorPage() {
   const [selectedProvince, setSelectedProvince] = useState("")
   const [selectedCareer, setSelectedCareer] = useState("")
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
-  const [availableSubjects, setAvailableSubjects] = useState<any[]>([])
-  const [careers, setCareers] = useState<any[]>([])
+  const [availableSubjects, setAvailableSubjects] = useState<Subject[]>([])
+  const [careers, setCareers] = useState<Career[]>([])
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
   const [showProvinceFilter, setShowProvinceFilter] = useState(false)
   const [universityLocations, setUniversityLocations] = useState<{ id: string; name: string }[]>([])

@@ -6,17 +6,49 @@ import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Search, ChevronRight, Plus, Star } from "lucide-react"
-import AdBanner from "@/components/ad-banner"
 import { universities, hasMultipleLocations, getUniversityLocations } from "@/lib/university-data"
 import { fetchProfessors, fetchCareers, fetchSubjects, fetchReviewsByProfessorId } from "@/lib/database"
+
+interface Career {
+  id: string;
+  name: string;
+  universityId: string;
+}
+
+interface Subject {
+  id: string;
+  name: string;
+  careerId: string;
+}
+
+interface Professor {
+  id: string;
+  name: string;
+  universityId: string;
+  provinceId?: string;
+  subjects: string[];
+  totalReviews?: number;
+  averageRating?: number;
+}
+
+interface Review {
+  id: string;
+  rating: number;
+  // Add other review properties as needed
+}
+
+interface UniversityLocation {
+  id: string;
+  name: string;
+}
 
 export default function SearchPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const [careers, setCareers] = useState<any[]>([])
-  const [subjects, setSubjects] = useState<any[]>([])
-  const [professors, setProfessors] = useState<any[]>([])
+  const [careers, setCareers] = useState<Career[]>([])
+  const [subjects, setSubjects] = useState<Subject[]>([])
+  const [professors, setProfessors] = useState<Professor[]>([])
 
   const [selectedUniversity, setSelectedUniversity] = useState<string>("")
   const [selectedCareer, setSelectedCareer] = useState<string>("")
@@ -26,7 +58,7 @@ export default function SearchPage() {
 
   const [selectedProvince, setSelectedProvince] = useState<string>("")
   const [showProvinceFilter, setShowProvinceFilter] = useState<boolean>(false)
-  const [universityLocations, setUniversityLocations] = useState<{ id: string; name: string }[]>([])
+  const [universityLocations, setUniversityLocations] = useState<UniversityLocation[]>([])
 
   useEffect(() => {
     if (!selectedUniversity) {
@@ -54,7 +86,7 @@ export default function SearchPage() {
       setIsLoading(true)
       const allCareers = await fetchCareers()
       const filtered = allCareers.filter(
-        (c: any) => c.universityId === selectedUniversity
+        (c: Career) => c.universityId === selectedUniversity
       )      
       setCareers(filtered)
       setIsLoading(false)
@@ -72,7 +104,7 @@ export default function SearchPage() {
     const loadSubjects = async () => {
       setIsLoading(true)
       const allSubjects = await fetchSubjects()
-      const filtered = allSubjects.filter((s: any) => s.careerId === selectedCareer)
+      const filtered = allSubjects.filter((s: Subject) => s.careerId === selectedCareer)
       setSubjects(filtered)
       setIsLoading(false)
     }
@@ -91,23 +123,23 @@ export default function SearchPage() {
       let all = await fetchProfessors()
 
       if (searchQuery) {
-        all = all.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+        all = all.filter((p: Professor) => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
       }
       if (selectedUniversity) {
-        all = all.filter((p) => p.universityId === selectedUniversity)
+        all = all.filter((p: Professor) => p.universityId === selectedUniversity)
       }
       if (selectedProvince) {
-        all = all.filter((p) => p.provinceId === selectedProvince)
+        all = all.filter((p: Professor) => p.provinceId === selectedProvince)
       }
       if (selectedSubject) {
-        all = all.filter((p) => p.subjects.includes(selectedSubject))
+        all = all.filter((p: Professor) => p.subjects.includes(selectedSubject))
       }
 
       const enriched = await Promise.all(
-        all.map(async (prof) => {
+        all.map(async (prof: Professor) => {
           const reviews = await fetchReviewsByProfessorId(prof.id)
           const total = reviews.length
-          const average = total ? reviews.reduce((acc, r) => acc + r.rating, 0) / total : 0
+          const average = total ? reviews.reduce((acc: number, r: Review) => acc + r.rating, 0) / total : 0
           return { ...prof, totalReviews: total, averageRating: average }
         }),
       )
@@ -298,7 +330,7 @@ export default function SearchPage() {
                           {universities.find((u) => u.id === professor.universityId)?.name || "Universidad"}
                         </p>
                         <div className="flex items-center gap-2">
-                          {renderStars(professor.averageRating)}
+                          {renderStars(professor.averageRating ?? 0)}
                           <span className="text-gray-600 text-sm">
                             ({professor.totalReviews} {professor.totalReviews === 1 ? "reseña" : "reseñas"})
                           </span>
@@ -334,7 +366,7 @@ export default function SearchPage() {
         </div>
 
         <div className="mt-12">
-          <AdBanner slot="0987654321" className="h-[250px] bg-blue-50 rounded-md overflow-hidden shadow-sm" />
+          {/* aqui va el banner de anuncios */}
         </div>
       </div>
     </div>

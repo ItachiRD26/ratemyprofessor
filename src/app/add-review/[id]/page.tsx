@@ -22,7 +22,7 @@ export default function AddReviewPage() {
   const [subjects, setSubjects] = useState<Subject[]>([])
   const [rating, setRating] = useState(0)
   const [difficulty, setDifficulty] = useState(0)
-  const [wouldTakeAgain, setWouldTakeAgain] = useState<boolean | null>(null)
+  const [wouldTakeAgain, setWouldTakeAgain] = useState<boolean>(false);
   const [comment, setComment] = useState("")
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [professorName, setProfessorName] = useState("")

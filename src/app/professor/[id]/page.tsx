@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Star, Filter, Calendar, ThumbsUp, ThumbsDown } from "lucide-react";
-import AdBanner from "@/components/ad-banner";
+// import AdBanner from "@/components/ad-banner";
 import { universities } from "@/lib/university-data";
 import { fetchProfessorById, fetchReviewsByProfessorId, fetchSubjects } from "@/lib/database";
 
@@ -60,6 +60,10 @@ export default function ProfessorProfilePage() {
           fetchReviewsByProfessorId(professorId),
           fetchSubjects()
         ]);
+
+        if (!prof) {
+          return <div>Loading professor data...</div>;
+        }
 
         // Actualizar promedio y cantidad de reseñas si hay reseñas disponibles
         if (reviewsData.length > 0) {
@@ -296,7 +300,7 @@ export default function ProfessorProfilePage() {
       </div>
 
       <div className="mt-12">
-        <AdBanner slot="0987654321" className="h-[250px] bg-gray-100 mb-0" />
+        {/* aqui va el banner de anuncios */}
       </div>
     </div>
   );
