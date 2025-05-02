@@ -25,12 +25,8 @@ export default function RootLayout({
     <html lang="es">
       <head>
         {/* Google AdSense Script */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6618092093224881"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6618092093224881"
+    crossOrigin="anonymous"></script>
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
