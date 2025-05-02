@@ -103,21 +103,6 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
-          <div>
-            <div className="bg-white rounded-lg shadow-md p-6 mb-8 border border-blue-100 hover:shadow-lg transition-shadow">
-              <h2 className="text-xl font-bold mb-4 text-blue-800">Contáctanos</h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                ¿Tienes preguntas, sugerencias o comentarios? Nos encantaría saber de ti.
-              </p>
-              <Link
-                href="/contact"
-                className="block w-full bg-blue-700 text-white text-center px-4 py-3 rounded-md hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-200"
-              >
-                Contacto
-              </Link>
-            </div>
-
             {/* Ad Banner */}
            {/* aquiva un el banner de anuncios */}
 
@@ -146,6 +131,5 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </div>
   )
 }
