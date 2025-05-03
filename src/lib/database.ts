@@ -10,6 +10,7 @@ export interface Professor {
   universityId: string;
   provinceId?: string;
   subjects: string[];
+  careerId: string;
   averageRating: number;
   totalReviews: number;
 }
@@ -34,13 +35,28 @@ export interface Career {
 
 export type NewCareer = Omit<Career, 'id'>;
 
-export async function professorExists(name: string, universityId: string): Promise<boolean> {
-  const professors = await fetchProfessors()
-  return professors.some(
-    (prof) => 
-      prof.name.toLowerCase() === name.toLowerCase() && 
-      prof.universityId === universityId
-  )
+// En database.ts
+export async function professorExists(
+  name: string,
+  universityId: string,
+  careerId: string,
+  subjectIds: string[]
+): Promise<boolean> {
+  const professors = await fetchProfessors();
+  
+  return professors.some(prof => {
+    // Verificar nombre, universidad y carrera
+    if (prof.name.toLowerCase() !== name.toLowerCase() ||
+        prof.universityId !== universityId ||
+        prof.careerId !== careerId) {
+      return false;
+    }
+
+    // Verificar si comparten al menos una materia
+    return prof.subjects?.some(subjectId => 
+      subjectIds.includes(subjectId)
+    );
+  });
 }
 
 export interface Review {
@@ -60,16 +76,23 @@ export type NewReview = Omit<Review, 'id'>;
 
 // Save a new professor
 // Modifica la función saveProfessor en database.ts
-export async function saveProfessor(professor: NewProfessor): Promise<string> {
-  // Validar que no exista un profesor con el mismo nombre en la misma universidad
-  const exists = await professorExists(professor.name, professor.universityId)
+export async function saveProfessor(
+  professor: NewProfessor & {careerId: string, subjects: string[]}
+): Promise<string> {
+  const exists = await professorExists(
+    professor.name,
+    professor.universityId,
+    professor.careerId,
+    professor.subjects
+  );
+
   if (exists) {
-    throw new Error("Ya existe un profesor con ese nombre en esta universidad")
+    throw new Error("Ya existe un profesor con estos datos (nombre, universidad, carrera y materia)");
   }
 
-  const newRef = push(ref(db, "professors"))
-  await set(newRef, professor)
-  return newRef.key!
+  const newRef = push(ref(db, "professors"));
+  await set(newRef, professor);
+  return newRef.key!;
 }
 
 // Save a new subject

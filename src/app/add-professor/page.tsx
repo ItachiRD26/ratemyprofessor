@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft, AlertCircle, Plus, Save } from "lucide-react"
 import { universities, provinces } from "@/lib/university-data"
-import { fetchCareers, fetchSubjects, saveProfessor, saveSubject, saveCareer, professorExists   } from "@/lib/database"
+import { fetchCareers, fetchSubjects, saveProfessor, saveSubject, saveCareer, professorExists, fetchSubjectById   } from "@/lib/database"
 
 interface Subject {
   id: string;
@@ -104,33 +104,31 @@ export default function AddProfessorPage() {
   }
 
   useEffect(() => {
-    if (!name.trim() || !selectedUniversity) return
+    if (!name.trim() || !selectedUniversity || !selectedCareer || selectedSubjects.length === 0) return;
   
     const checkProfessor = async () => {
       try {
-        const exists = await professorExists(name, selectedUniversity)
-        if (exists) {
-          setErrors((prev) => ({
-            ...prev,
-            name: "Ya existe un profesor con este nombre en la universidad seleccionada",
-          }))
-        } else if (errors.name?.includes("Ya existe")) {
-          // Limpiar el error si ya no existe el profesor
-          setErrors((prev) => {
-            const newErrors = { ...prev }
-            delete newErrors.name
-            return newErrors
-          })
-        }
-      } catch (error) {
-        console.error("Error al verificar profesor:", error)
-      }
-    }
+        const exists = await professorExists(
+          name,
+          selectedUniversity,
+          selectedCareer,
+          selectedSubjects
+        );
   
-    // Debounce para evitar muchas llamadas mientras escribe
-    const timer = setTimeout(checkProfessor, 500)
-    return () => clearTimeout(timer)
-  }, [name, selectedUniversity]) // Se ejecuta cuando cambia name o selectedUniversity
+        setErrors(prev => ({
+          ...prev,
+          name: exists 
+            ? "Este profesor ya está registrado para esta materia y universidad"
+            : ""
+        }));
+      } catch (error) {
+        console.error("Error al verificar profesor:", error);
+      }
+    };
+  
+    const timer = setTimeout(checkProfessor, 500);
+    return () => clearTimeout(timer);
+  }, [name, selectedUniversity, selectedCareer, selectedSubjects]); // Se ejecuta cuando cambia name o selectedUniversity
 
   const addNewSubject = async () => {
     if (!newSubjectName.trim()) return
@@ -191,34 +189,36 @@ export default function AddProfessorPage() {
   }
 
 // En AddProfessorPage, modifica la función handleSubmit
+// En handleSubmit
 const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  if (!validateForm()) return
-  setIsSubmitting(true)
+  e.preventDefault();
+  if (!validateForm()) return;
+  
+  setIsSubmitting(true);
   try {
     const newId = await saveProfessor({
       name,
       universityId: selectedUniversity,
       provinceId: selectedProvince,
+      careerId: selectedCareer,
       subjects: selectedSubjects,
       averageRating: 0,
-      totalReviews: 0,
-    })
-    router.push(`/professor/${newId}`)
+      totalReviews: 0
+    });
+    router.push(`/professor/${newId}`);
   } catch (error) {
-    console.error("Error al guardar profesor:", error)
-    if (error instanceof Error && error.message.includes("Ya existe")) {
-      setErrors((prev) => ({
+    if (error instanceof Error) {
+      setErrors(prev => ({
         ...prev,
-        name: "Ya existe un profesor con este nombre en la universidad seleccionada",
-      }))
-    } else {
-      alert("Ocurrió un error al guardar el profesor. Por favor intenta nuevamente.")
+        name: error.message.includes("Ya existe") 
+          ? "Este profesor ya está registrado para esta materia y universidad (nombre, universidad, carrera y materia)"
+          : "Error al guardar el profesor"
+      }));
     }
   } finally {
-    setIsSubmitting(false)
+    setIsSubmitting(false);
   }
-}
+};
 
 
 
