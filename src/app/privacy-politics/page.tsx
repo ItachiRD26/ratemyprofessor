@@ -3,7 +3,7 @@ export default function PrivacyPolicyPage() {
     <div className="max-w-4xl text-black mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-6 text-blue-900">Política de Privacidad</h1>
       <p className="mb-4">
-        En CalificaProfesor, respetamos tu privacidad y protegemos tus datos personales conforme a lo establecido por la legislación vigente y las recomendaciones de Google.
+        En RateMyProfessorRD, respetamos tu privacidad y protegemos tus datos personales conforme a lo establecido por la legislación vigente y las recomendaciones de Google.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">1. Información que recolectamos</h2>

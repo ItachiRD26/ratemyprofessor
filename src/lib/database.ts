@@ -34,6 +34,15 @@ export interface Career {
 
 export type NewCareer = Omit<Career, 'id'>;
 
+export async function professorExists(name: string, universityId: string): Promise<boolean> {
+  const professors = await fetchProfessors()
+  return professors.some(
+    (prof) => 
+      prof.name.toLowerCase() === name.toLowerCase() && 
+      prof.universityId === universityId
+  )
+}
+
 export interface Review {
   id: string;
   professorId: string;
@@ -50,7 +59,14 @@ export interface Review {
 export type NewReview = Omit<Review, 'id'>;
 
 // Save a new professor
+// Modifica la función saveProfessor en database.ts
 export async function saveProfessor(professor: NewProfessor): Promise<string> {
+  // Validar que no exista un profesor con el mismo nombre en la misma universidad
+  const exists = await professorExists(professor.name, professor.universityId)
+  if (exists) {
+    throw new Error("Ya existe un profesor con ese nombre en esta universidad")
+  }
+
   const newRef = push(ref(db, "professors"))
   await set(newRef, professor)
   return newRef.key!

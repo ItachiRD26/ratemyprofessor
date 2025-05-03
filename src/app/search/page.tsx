@@ -113,7 +113,7 @@ export default function SearchPage() {
   }, [selectedCareer])
 
   useEffect(() => {
-    if (!selectedSubject && !searchQuery) {
+    if (!selectedUniversity && !searchQuery) {
       setProfessors([])
       return
     }
@@ -143,6 +143,11 @@ export default function SearchPage() {
           return { ...prof, totalReviews: total, averageRating: average }
         }),
       )
+
+      // Ordenar por rating cuando no hay filtros específicos (excepto universidad)
+      if (!searchQuery && !selectedSubject) {
+        enriched.sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0))
+      }
 
       setProfessors(enriched)
       setIsLoading(false)
@@ -291,18 +296,17 @@ export default function SearchPage() {
         </div>
 
         {/* Results */}
-        <div className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-blue-900">Resultados</h2>
-            {selectedSubject && (
-              <Link
-                href="/add-professor"
-                className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-medium hover:underline"
-              >
-                <Plus size={18} /> Añadir profesor
-              </Link>
-            )}
-          </div>
+        <div className="flex justify-between items-center mb-6">
+  <h2 className="text-2xl font-bold text-blue-900">Resultados</h2>
+  {selectedUniversity && (
+    <Link
+      href="/add-professor"
+      className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-medium hover:underline"
+    >
+      <Plus size={18} /> Añadir profesor
+    </Link>
+  )}
+</div>
 
           {isLoading ? (
             <div className="text-center py-16 bg-white rounded-lg shadow-md border border-blue-100">
@@ -350,17 +354,17 @@ export default function SearchPage() {
                 <Search size={32} className="text-blue-700" />
               </div>
               <p className="text-gray-600 mb-6 text-lg">
-                {selectedSubject || searchQuery
-                  ? "No se encontraron profesores con los criterios seleccionados."
-                  : "No has realizado una búsqueda aún o no esta en la base de datos."}
+                {selectedUniversity
+                  ? "No se encontraron profesores en esta universidad con los criterios seleccionados."
+                  : "Selecciona una universidad para ver los profesores disponibles."}
               </p>
               <Link
-                href="/add-professor"
-                className="inline-flex items-center gap-2 bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-200"
-              >
-                <Plus size={18} />
-                Añadir profesor y Materia
-              </Link>
+            href="/add-professor"
+            className="inline-flex items-center gap-2 bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-200"
+            >
+              <Plus size={18} />
+                Añadir profesor
+          </Link>
             </div>
           )}
         </div>
@@ -369,6 +373,5 @@ export default function SearchPage() {
           {/* aqui va el banner de anuncios */}
         </div>
       </div>
-    </div>
   )
 }
