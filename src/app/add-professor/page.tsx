@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft, AlertCircle, Plus, Save } from "lucide-react"
 import { universities, provinces } from "@/lib/university-data"
-import { fetchCareers, fetchSubjects, saveProfessor, saveSubject, saveCareer, professorExists, fetchSubjectById   } from "@/lib/database"
+import { fetchCareers, fetchSubjects, saveProfessor, saveSubject, saveCareer, professorExists} from "@/lib/database"
 
 interface Subject {
   id: string;
