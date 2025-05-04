@@ -110,6 +110,14 @@ export const provinces = [
       website: "https://www.uce.edu.do",
     },
     {
+      id: "itla",
+      name: "Instituto Tecnológico de las Américas (ITLA)",
+      type: "public",
+      locations: ["santo-domingo"],
+      mainLocation: "Santo Domingo",
+      website: "https://itla.edu.do",
+    },    
+    {
       id: "ufhec",
       name: "Universidad Federico Henríquez y Carvajal (UFHEC)",
       type: "private",
