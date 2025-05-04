@@ -46,6 +46,7 @@ export default function AddProfessorPage() {
   const [careers, setCareers] = useState<Career[]>([])
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
   const [showProvinceFilter, setShowProvinceFilter] = useState(false)
   const [universityLocations, setUniversityLocations] = useState<{ id: string; name: string }[]>([])
