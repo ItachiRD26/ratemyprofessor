@@ -293,7 +293,7 @@ export default function ProfessorProfilePage() {
         {/* Add Review Button - Top */}
         <div className="mb-8 text-center">
           <Link
-            href={`/professor/${professorId}/add-review`}
+            href={`/add-review/${professorId}`}
             className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-md hover:bg-sky-700 transition-colors shadow-md"
           >
             <Star size={18} />
@@ -412,7 +412,7 @@ export default function ProfessorProfilePage() {
                 Este profesor aún no tiene reseñas. ¡Sé el primero en compartir tu experiencia!
               </p>
               <Link
-                href={`/professor/${professorId}/add-review`}
+                href={`/add-review/${professorId}`}
                 className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-md hover:bg-sky-700 transition-colors shadow-md"
               >
                 <Star size={18} />
@@ -424,7 +424,7 @@ export default function ProfessorProfilePage() {
           {filteredReviews.length > 0 && (
             <div className="mt-8 text-center">
               <Link
-                href={`/professor/${professorId}/add-review`}
+                href={`/add-review/${professorId}`}
                 className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-md hover:bg-sky-700 transition-colors shadow-md"
               >
                 <Star size={18} />
