@@ -9,11 +9,33 @@ import CookieBanner from "@/components/cookie-banner"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Califica Tu Profesor - República Dominicana",
-  description: "Plataforma anónima para evaluar profesores de universidades en República Dominicana",
+  title: "RateMyProfessorRD | Califica Profesores en República Dominicana",
+  description: "Evalúa profesores de universidades en República Dominicana de forma anónima. Ayuda a otros estudiantes a tomar decisiones informadas con RateMyProfessorRD.",
   icons: {
     icon: "/logo.png",
-  }
+  },
+  openGraph: {
+    title: "RateMyProfessorRD",
+    description: "Evalúa a tus profesores de forma anónima y mejora la comunidad estudiantil en República Dominicana.",
+    url: "https://www.ratemyprofessorrd.com",
+    siteName: "RateMyProfessorRD",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "RateMyProfessorRD",
+      },
+    ],
+    locale: "es_DO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RateMyProfessorRD",
+    description: "Plataforma anónima para calificar profesores en universidades dominicanas.",
+    images: ["/logo.png"],
+  },
 }
 
 export default function RootLayout({
@@ -25,18 +47,25 @@ export default function RootLayout({
     <html lang="es">
       <head>
         {/* Google AdSense Script */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6618092093224881"
-    crossOrigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6618092093224881"
+          crossOrigin="anonymous"
+        ></script>
+
+        {/* SEO Essentials */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0ea5e9" />
+        <meta name="author" content="RateMyProfessorRD" />
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow bg-white">{children}</main>
           <Footer />
-          <CookieBanner /> 
+          <CookieBanner />
         </div>
       </body>
     </html>
   )
 }
-
