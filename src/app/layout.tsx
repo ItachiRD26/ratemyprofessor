@@ -53,6 +53,18 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
 
+        {/* Adsterra Scripts */}
+        <script
+          async
+          data-cfasync="false"
+          src="//pl26569797.profitableratecpm.com/402912c82c937e4485d9201543ccec5b/invoke.js"
+        ></script>
+        <script
+          async
+          type="text/javascript"
+          src="//www.highperformanceformat.com/5ca5e5611846bf5ab5047e45a8d87a57/invoke.js"
+        ></script>
+
         {/* SEO Essentials */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0ea5e9" />

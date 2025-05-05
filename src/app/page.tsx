@@ -1,8 +1,28 @@
+"use client"
+
 import Link from "next/link"
 import { Search, Star, ChevronRight, School, ArrowRight } from "lucide-react"
 import { universities } from "@/lib/university-data"
+import { useEffect } from "react"
 
+declare global {
+  interface Window {
+    atOptions?: any
+  }
+}
 export default function Home() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.atOptions = {
+        key: "5ca5e5611846bf5ab5047e45a8d87a57",
+        format: "iframe",
+        height: 300,
+        width: 160,
+        params: {},
+      }
+    }
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
@@ -35,23 +55,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Decorative elements */}
-        <div
-          className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white"
-          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
-        ></div>
+        <div className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}></div>
       </section>
 
       {/* Top Ad Banner - Clearly labeled */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-6">
-        <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
-          <p className="text-xs text-slate-500 mb-2">ESPACIO PUBLICITARIO</p>
-          <div className="h-[90px] bg-slate-100 flex items-center justify-center">
-            <p className="text-slate-400 text-sm">Anuncio</p>
-          </div>
-        </div>
-      </div>
+      <div id="container-402912c82c937e4485d9201543ccec5b" style={{ margin: "0 auto" }}></div>
+
 
       {/* Stats Section */}
       <section className="py-12 bg-white">
@@ -123,14 +132,22 @@ export default function Home() {
       </section>
 
       {/* Middle Ad Banner - Clearly labeled */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-6 bg-white">
-        <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
-          <p className="text-xs text-slate-500 mb-2">ESPACIO PUBLICITARIO</p>
-          <div className="h-[120px] bg-slate-100 flex items-center justify-center">
-            <p className="text-slate-400 text-sm">Anuncio</p>
-          </div>
-        </div>
-      </div>
+      <div id="container-26469685" style={{ margin: "0 auto" }}></div>
+<div
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.atOptions = {
+        'key' : '26469685',
+        'format' : 'iframe',
+        'height' : 300,
+        'width' : 160,
+        'params' : {}
+      };
+    `,
+  }}
+/>
+
+
 
       {/* Featured Universities */}
       <section className="py-16 bg-white">
@@ -288,14 +305,20 @@ export default function Home() {
       </section>
 
       {/* Bottom Ad Banner - Clearly labeled */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-6 bg-white">
-        <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
-          <p className="text-xs text-slate-500 mb-2">ESPACIO PUBLICITARIO</p>
-          <div className="h-[90px] bg-slate-100 flex items-center justify-center">
-            <p className="text-slate-400 text-sm">Anuncio</p>
-          </div>
-        </div>
-      </div>
+      <div id="container-26470285" style={{ margin: "0 auto" }}></div>
+<div
+  dangerouslySetInnerHTML={{
+    __html: `
+      window.atOptions = {
+        'key' : '26470285',
+        'format' : 'iframe',
+        'height' : 300,
+        'width' : 160,
+        'params' : {}
+      };
+    `,
+  }}
+/>
     </div>
   )
 }
