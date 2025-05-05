@@ -7,9 +7,16 @@ import { useEffect } from "react"
 
 declare global {
   interface Window {
-    atOptions?: any
+    atOptions?: {
+      key: string
+      format: string
+      height: number
+      width: number
+      params: Record<string, unknown>
+    }
   }
 }
+  
 export default function Home() {
   useEffect(() => {
     if (typeof window !== "undefined") {
