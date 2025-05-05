@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Search, Star, ChevronRight, School, ArrowRight } from "lucide-react"
 import { universities } from "@/lib/university-data"
