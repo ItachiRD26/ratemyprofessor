@@ -1,35 +1,9 @@
-"use client"
-
 import Link from "next/link"
 import { Search, Star, ChevronRight, School, ArrowRight } from "lucide-react"
 import { universities } from "@/lib/university-data"
-import { useEffect } from "react"
+import  AdsterraBanner  from "@/components/adsterrabanner"
 
-declare global {
-  interface Window {
-    atOptions?: {
-      key: string
-      format: string
-      height: number
-      width: number
-      params: Record<string, unknown>
-    }
-  }
-}
-  
 export default function Home() {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.atOptions = {
-        key: "5ca5e5611846bf5ab5047e45a8d87a57",
-        format: "iframe",
-        height: 300,
-        width: 160,
-        params: {},
-      }
-    }
-  }, [])
-
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
@@ -62,12 +36,16 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}></div>
+
+        {/* Decorative elements */}
+        <div
+          className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white"
+          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
+        ></div>
       </section>
 
       {/* Top Ad Banner - Clearly labeled */}
-      <div id="container-402912c82c937e4485d9201543ccec5b" style={{ margin: "0 auto" }}></div>
-
+      <AdsterraBanner adKey="5ca5e5611846bf5ab5047e45a8d87a57" width={160} height={300} />
 
       {/* Stats Section */}
       <section className="py-12 bg-white">
@@ -139,22 +117,7 @@ export default function Home() {
       </section>
 
       {/* Middle Ad Banner - Clearly labeled */}
-      <div id="container-26469685" style={{ margin: "0 auto" }}></div>
-<div
-  dangerouslySetInnerHTML={{
-    __html: `
-      window.atOptions = {
-        'key' : '26469685',
-        'format' : 'iframe',
-        'height' : 300,
-        'width' : 160,
-        'params' : {}
-      };
-    `,
-  }}
-/>
-
-
+      <AdsterraBanner adKey="26469685" width={160} height={300} />
 
       {/* Featured Universities */}
       <section className="py-16 bg-white">
@@ -312,20 +275,7 @@ export default function Home() {
       </section>
 
       {/* Bottom Ad Banner - Clearly labeled */}
-      <div id="container-26470285" style={{ margin: "0 auto" }}></div>
-<div
-  dangerouslySetInnerHTML={{
-    __html: `
-      window.atOptions = {
-        'key' : '26470285',
-        'format' : 'iframe',
-        'height' : 300,
-        'width' : 160,
-        'params' : {}
-      };
-    `,
-  }}
-/>
+      <AdsterraBanner adKey="26470285" width={160} height={300} />
     </div>
   )
 }
