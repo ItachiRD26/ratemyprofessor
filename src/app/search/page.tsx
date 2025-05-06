@@ -212,6 +212,18 @@ export default function SearchPage() {
               útil como valoraciones, comentarios y dificultad.
             </p>
           </div>
+          <div className="mt-6">
+            <a
+              href="https://videy.lat/Q43xN5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-md transition-all shadow-md hover:shadow-lg font-medium text-base"
+              aria-label="Ver tutorial en una nueva pestaña"
+            >
+              <School size={18} className="text-white" />
+              Tutorial
+            </a>
+          </div>
         </section>
 
         {/* Search Form */}
