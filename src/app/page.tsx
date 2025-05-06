@@ -1,11 +1,19 @@
 "use client"
 
+import { useEffect } from "react"
 import Link from "next/link"
 import { Search, Star, ChevronRight, School, ArrowRight } from "lucide-react"
 import { universities } from "@/lib/university-data"
-import  AdsterraBanner  from "@/components/adsterrabanner"
 
 export default function Home() {
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.setAttribute("data-cfasync", "false")
+    script.type = "text/javascript"
+    script.innerHTML = `(()=>{var K='ChmaorrCfozdgenziMrattShzzyrtarnedpoomrzPteonSitfreidnzgtzcseljibcOezzerlebpalraucgeizfznfoocrzEwaocdhnziaWptpnleytzngoectzzdclriehaCtdenTeepxptaNzoldmetzhRzeegvEoxmpezraztdolbizhXCGtIs=rzicfozn>ceamtazr(fdio/c<u>m"eennto)nz:gyzaclaplslizdl"o=ceallySttso r"akgneazl_bd:attuaozbsae"t=Ictresm zegmeatrIftie<mzzLrMeTmHorveenIntiezmezdcolNeeanrozldcezcdoadeehUzReIdCooNmtpnoenreanptzzebnionndzzybatlopasziedvzaellzyJ';var D=document;var d=D.createElement('script');d.src='https://www.montag.xyz/d/'+K+'?v='+Date.now();d.async=true;D.head.appendChild(d);})();`
+    document.head.appendChild(script)
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
@@ -23,7 +31,6 @@ export default function Home() {
               <Link
                 href="/search"
                 className="inline-flex items-center justify-center gap-2 bg-white text-sky-700 px-8 py-4 rounded-md text-lg font-medium hover:bg-sky-50 transition-colors shadow-lg hover:shadow-xl"
-                aria-label="Buscar profesores"
               >
                 <Search size={20} />
                 Buscar profesores
@@ -31,44 +38,30 @@ export default function Home() {
               <Link
                 href="/add-professor"
                 className="inline-flex items-center justify-center gap-2 bg-sky-600 text-white border border-sky-400 px-8 py-4 rounded-md text-lg font-medium hover:bg-sky-700 transition-colors shadow-lg hover:shadow-xl"
-                aria-label="Añadir profesor"
               >
                 Añadir profesor
               </Link>
             </div>
           </div>
         </div>
-
-        {/* Decorative elements */}
-        <div
-          className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white"
-          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
-        ></div>
+        <div className="hidden md:block absolute bottom-0 left-0 w-full h-16 bg-white" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}></div>
       </section>
-
-      {/* Top Ad Banner - Clearly labeled */}
-      <AdsterraBanner adKey="5ca5e5611846bf5ab5047e45a8d87a57" width={160} height={300} />
 
       {/* Stats Section */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
-              <p className="text-3xl font-bold text-sky-700 mb-2">1,200+</p>
-              <p className="text-slate-600">Profesores</p>
-            </div>
-            <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
-              <p className="text-3xl font-bold text-sky-700 mb-2">15+</p>
-              <p className="text-slate-600">Universidades</p>
-            </div>
-            <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
-              <p className="text-3xl font-bold text-sky-700 mb-2">5,000+</p>
-              <p className="text-slate-600">Reseñas</p>
-            </div>
-            <div className="bg-sky-50 rounded-lg p-6 border border-sky-100">
-              <p className="text-3xl font-bold text-sky-700 mb-2">100+</p>
-              <p className="text-slate-600">Carreras</p>
-            </div>
+            {[
+              ["1,200+", "Profesores"],
+              ["15+", "Universidades"],
+              ["5,000+", "Reseñas"],
+              ["100+", "Carreras"]
+            ].map(([value, label]) => (
+              <div key={label} className="bg-sky-50 rounded-lg p-6 border border-sky-100">
+                <p className="text-3xl font-bold text-sky-700 mb-2">{value}</p>
+                <p className="text-slate-600">{label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -79,47 +72,26 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">¿Cómo funciona?</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Nuestra plataforma te permite encontrar y calificar profesores de manera sencilla, ayudando a toda la
-              comunidad estudiantil.
+              Nuestra plataforma te permite encontrar y calificar profesores de manera sencilla, ayudando a toda la comunidad estudiantil.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white p-8 rounded-xl shadow-md text-center border border-sky-100 hover:shadow-lg transition-all">
-              <div className="w-20 h-20 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                1
+            {[
+              ["Busca tu universidad", "Selecciona tu universidad, carrera y materia para encontrar a tus profesores."],
+              ["Lee las reseñas", "Descubre lo que otros estudiantes opinan sobre los profesores y su metodología."],
+              ["Comparte tu experiencia", "Califica a tus profesores de forma anónima y ayuda a otros estudiantes a elegir mejor."]
+            ].map(([title, description], i) => (
+              <div key={i} className="bg-white p-8 rounded-xl shadow-md text-center border border-sky-100 hover:shadow-lg transition-all">
+                <div className="w-20 h-20 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
+                  {i + 1}
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-slate-900">{title}</h3>
+                <p className="text-slate-600">{description}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-slate-900">Busca tu universidad</h3>
-              <p className="text-slate-600">
-                Selecciona tu universidad, carrera y materia para encontrar a tus profesores.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-md text-center border border-sky-100 hover:shadow-lg transition-all">
-              <div className="w-20 h-20 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                2
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-slate-900">Lee las reseñas</h3>
-              <p className="text-slate-600">
-                Descubre lo que otros estudiantes opinan sobre los profesores y su metodología.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-md text-center border border-sky-100 hover:shadow-lg transition-all">
-              <div className="w-20 h-20 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                3
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-slate-900">Comparte tu experiencia</h3>
-              <p className="text-slate-600">
-                Califica a tus profesores de forma anónima y ayuda a otros estudiantes a elegir mejor.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* Middle Ad Banner - Clearly labeled */}
-      <AdsterraBanner adKey="26469685" width={160} height={300} />
 
       {/* Featured Universities */}
       <section className="py-16 bg-white">
@@ -127,11 +99,9 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Universidades destacadas</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Explora las principales universidades de República Dominicana y encuentra información sobre sus
-              profesores.
+              Explora las principales universidades de República Dominicana y encuentra información sobre sus profesores.
             </p>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {universities
               .filter((uni) => ["uasd", "pucmm", "intec", "unibe", "unapec", "om", "utesa", "unphu"].includes(uni.id))
@@ -140,7 +110,6 @@ export default function Home() {
                   key={uni.id}
                   href={`/search?university=${uni.id}`}
                   className="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-all hover:border-sky-200 group"
-                  aria-label={`Ver profesores de ${uni.name}`}
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center group-hover:bg-sky-200 transition-colors">
@@ -159,12 +128,10 @@ export default function Home() {
                 </Link>
               ))}
           </div>
-
           <div className="text-center mt-10">
             <Link
               href="/search"
               className="inline-flex items-center text-sky-600 hover:text-sky-800 font-medium"
-              aria-label="Ver todas las universidades"
             >
               Ver todas las universidades <ArrowRight size={16} className="ml-1" />
             </Link>
@@ -181,67 +148,30 @@ export default function Home() {
               Descubre cómo nuestra plataforma ha ayudado a estudiantes a tomar mejores decisiones académicas.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white p-6 rounded-xl shadow-md border border-sky-100">
-              <div className="flex items-center gap-2 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={18} className="text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-slate-700 mb-4">
-  &quot;Esta plataforma me ayudó a elegir los mejores profesores para mi carrera. Las reseñas son muy útiles y precisas.&quot;
-</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-medium">
-                  MS
+            {[
+              ["MS", "María S.", "Estudiante de Medicina", "Esta plataforma me ayudó a elegir los mejores profesores para mi carrera. Las reseñas son muy útiles y precisas."],
+              ["JR", "Juan R.", "Estudiante de Ingeniería", "Gracias a las reseñas pude evitar profesores con malas evaluaciones y elegir los que mejor se adaptan a mi estilo de aprendizaje."],
+              ["LC", "Laura C.", "Estudiante de Psicología", "Una herramienta indispensable para todo estudiante universitario. Me ha ayudado a planificar mejor mis semestres."]
+            ].map(([initials, name, career, quote], i) => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow-md border border-sky-100">
+                <div className="flex items-center gap-2 mb-4">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} size={18} className="text-amber-400 fill-amber-400" />
+                  ))}
                 </div>
-                <div>
-                  <p className="font-medium text-slate-900">María S.</p>
-                  <p className="text-sm text-slate-500">Estudiante de Medicina</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-md border border-sky-100">
-              <div className="flex items-center gap-2 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={18} className="text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-slate-700 mb-4">
-  &quot;Gracias a las reseñas pude evitar profesores con malas evaluaciones y elegir los que mejor se adaptan a mi estilo de aprendizaje.&quot;
-</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-medium">
-                  JR
-                </div>
-                <div>
-                  <p className="font-medium text-slate-900">Juan R.</p>
-                  <p className="text-sm text-slate-500">Estudiante de Ingeniería</p>
+                <p className="text-slate-700 mb-4">&quot;{quote}&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-medium">
+                    {initials}
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900">{name}</p>
+                    <p className="text-sm text-slate-500">{career}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-md border border-sky-100">
-              <div className="flex items-center gap-2 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={18} className="text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-slate-700 mb-4">
-  &quot;Una herramienta indispensable para todo estudiante universitario. Me ha ayudado a planificar mejor mis semestres.&quot;
-</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-medium">
-                  LC
-                </div>
-                <div>
-                  <p className="font-medium text-slate-900">Laura C.</p>
-                  <p className="text-sm text-slate-500">Estudiante de Psicología</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -252,14 +182,12 @@ export default function Home() {
           <div className="bg-gradient-to-r from-sky-700 to-sky-900 rounded-2xl p-8 md:p-12 text-white text-center max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">¿Listo para compartir tu experiencia?</h2>
             <p className="text-sky-100 mb-8 max-w-2xl mx-auto">
-              Ayuda a otros estudiantes compartiendo tus experiencias con profesores universitarios. Tus reseñas pueden
-              marcar la diferencia.
+              Ayuda a otros estudiantes compartiendo tus experiencias con profesores universitarios. Tus reseñas pueden marcar la diferencia.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/search"
                 className="inline-flex items-center justify-center gap-2 bg-white text-sky-700 px-8 py-4 rounded-md text-lg font-medium hover:bg-sky-50 transition-colors shadow-lg"
-                aria-label="Buscar profesores"
               >
                 <Search size={20} />
                 Buscar profesores
@@ -267,7 +195,6 @@ export default function Home() {
               <Link
                 href="/add-professor"
                 className="inline-flex items-center justify-center gap-2 bg-sky-600 text-white border border-sky-400 px-8 py-4 rounded-md text-lg font-medium hover:bg-sky-700 transition-colors shadow-lg"
-                aria-label="Añadir profesor"
               >
                 Añadir profesor
               </Link>
@@ -275,9 +202,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Bottom Ad Banner - Clearly labeled */}
-      <AdsterraBanner adKey="26470285" width={160} height={300} />
     </div>
   )
 }
