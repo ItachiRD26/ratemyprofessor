@@ -13,8 +13,8 @@ import { fetchProfessors, fetchCareers, fetchSubjects, fetchReviewsByProfessorId
 import AdBanner from "@/components/ad-banner"
 
 const ADS = {
-  KEY_728x90:  "28848673",
-  KEY_300x250: "26470285",
+  KEY_728x90:  "b9e543bce710b4ff4d173c767a51dcf8",
+  KEY_300x250: "0300a674afc01f9df824c74038817554",
 }
 
 const AD_INTERVAL = 4

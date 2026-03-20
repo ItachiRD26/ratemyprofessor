@@ -14,8 +14,8 @@ import AdBanner from "@/components/ad-banner"
  *   KEY_300x250 → Banner 300×250 (ya creado ✅)
  */
 const ADS = {
-  KEY_728x90:  "28848673",   // ← pega aquí el key de tu banner 728×90
-  KEY_300x250: "26470285",   // ← pega aquí el key de tu banner 300×250
+  KEY_728x90:  "b9e543bce710b4ff4d173c767a51dcf8",
+  KEY_300x250: "0300a674afc01f9df824c74038817554",
 }
 
 export default function Home() {
