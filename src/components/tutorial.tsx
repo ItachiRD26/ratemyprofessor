@@ -10,19 +10,17 @@ import {
 // ── Tipos ──────────────────────────────────────────────────────────────────
 interface TutorialStep {
   id: string
-  targetId?: string        // ID del elemento del DOM a resaltar (opcional)
+  targetId?: string
   icon: React.ReactNode
-  badge: string            // Número de paso o emoji
+  badge: string
   title: string
   description: string
   position?: "top" | "bottom" | "left" | "right" | "center"
-  highlight?: boolean      // Si debe iluminar el elemento
+  highlight?: boolean
 }
 
 interface SiteTutorialProps {
-  /** Mostrar automáticamente en la primera visita */
   autoShow?: boolean
-  /** Botón externo para abrir el tutorial */
   triggerLabel?: string
   showTriggerButton?: boolean
 }
@@ -171,7 +169,6 @@ export default function SiteTutorial({
       if (el) {
         const rect = el.getBoundingClientRect()
         setTargetRect(rect)
-        // Scroll suave al elemento
         el.scrollIntoView({ behavior: "smooth", block: "center" })
       } else {
         setTargetRect(null)
@@ -195,21 +192,22 @@ export default function SiteTutorial({
     }, 180)
   }, [])
 
-  const goNext = useCallback(() => {
-    if (isLast) return close()
-    animateTransition(() => setCurrentStep((s) => s + 1))
-  }, [isLast, animateTransition])
-
-  const goPrev = useCallback(() => {
-    if (isFirst) return
-    animateTransition(() => setCurrentStep((s) => s - 1))
-  }, [isFirst, animateTransition])
-
+  // ✅ FIX: close definido ANTES de goNext para que pueda incluirse en sus deps
   const close = useCallback(() => {
     setIsOpen(false)
     setCurrentStep(0)
     localStorage.setItem(STORAGE_KEY, "true")
   }, [])
+
+  const goNext = useCallback(() => {
+    if (isLast) return close()
+    animateTransition(() => setCurrentStep((s) => s + 1))
+  }, [isLast, animateTransition, close]) // ✅ close incluido aquí
+
+  const goPrev = useCallback(() => {
+    if (isFirst) return
+    animateTransition(() => setCurrentStep((s) => s - 1))
+  }, [isFirst, animateTransition])
 
   const open = useCallback(() => {
     setCurrentStep(0)
@@ -247,7 +245,7 @@ export default function SiteTutorial({
         window.innerWidth - tooltipW - 16
       ))
     } else if (step.position === "top") {
-      top = targetRect.top - MARGIN - 10 // se ajusta con transform
+      top = targetRect.top - MARGIN - 10
       left = Math.max(16, Math.min(
         targetRect.left + targetRect.width / 2 - tooltipW / 2,
         window.innerWidth - tooltipW - 16
